@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.2.6.Final</version>
+			<version>5.4.21.Final</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
@@ -79,11 +79,10 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
 		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>jstl-api</artifactId>
-			<version>1.2</version>
+		    <groupId>org.primefaces</groupId>
+		    <artifactId>primefaces</artifactId>
+		    <version>6.2</version>
 		</dependency>
 		
 	</dependencies>
