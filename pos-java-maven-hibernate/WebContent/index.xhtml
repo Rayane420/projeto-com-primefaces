@@ -8,8 +8,14 @@
 
 <h:body>
 
-	<h:link value="Página JSF" outcome="index.jsf"/> <br/>
-	<h:link value="Página PrimeFaces" outcome="primefaces.jsf" />
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem/>
+			<p:menuitem value="Página JSF" action="index.jsf"/>
+			<p:menuitem value="Página PrimeFaces" action="primefaces.jsf"/>
+		</p:breadCrumb>
+	</h:form>
+	
 
 	<h:form>
 		<h:messages showDetail="true" />
@@ -29,11 +35,20 @@
 			<h:outputLabel>Idade:</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 			
+			<h:outputLabel>Sexo:</h:outputLabel>
+			<h:selectOneMenu value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
+				<f:selectItem itemValue="MASCULINO" />
+				<f:selectItem itemValue="FEMININO"/>
+			</h:selectOneMenu>
+			
 			<h:outputLabel>Login:</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}"/>
 			
 			<h:outputLabel>Senha:</h:outputLabel>
 			<h:inputSecret redisplay="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}"/>
+			
+			
+			
 		</h:panelGrid>
 		<br/>
 		<h:commandButton value="Salvar/Atualizar"  action="#{usuarioPessoaManagedBean.salvar}"/>
@@ -73,6 +88,8 @@
 			<f:facet name="header">Login</f:facet>
 				<h:outputText value="#{user.login}"/>
 			</h:column>
+			
+			
 			
 			<h:column>
 			<f:facet name="header">Editar</f:facet>

@@ -28,6 +28,7 @@ public class UsuarioPessoa {
 	private String email;
 	private String login;
 	private String senha;
+	private String sexo;
 	private int idade;
 	
 	@OneToMany (mappedBy = "usuarioPessoa", fetch = FetchType.EAGER)   //ligação um para muitos mapeado pelo usuarioPessoa
@@ -75,6 +76,15 @@ public class UsuarioPessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	
+
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 	public int getIdade() {
 		return idade;
 	}
@@ -84,8 +94,10 @@ public class UsuarioPessoa {
 	@Override
 	public String toString() {
 		return "UsuarioPessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email
-				+ ", login=" + login + ", senha=" + senha + ", idade=" + idade + "]";
+				+ ", login=" + login + ", senha=" + senha + ", idade=" + idade + ", telefoneUsers="
+				+ telefoneUsers + "]";
 	}
+
 	
 	
 	
