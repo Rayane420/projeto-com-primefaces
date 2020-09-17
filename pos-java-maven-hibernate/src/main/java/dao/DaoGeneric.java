@@ -40,12 +40,14 @@ public class DaoGeneric<E> { //E de entidade
 	
 	/*-------------2º Método para consultar-------------*/	
 	public E pesquisar (Long id, Class<E> entidade) { //pesquisando a Primary Key
-	E e = (E) entityManager.find(entidade, id);
+		entityManager.clear(); //limpando os dados que ja foram excluídos
+		E e = (E) entityManager.createQuery("from " + entidade.getSimpleName() + " where id = " + id).getSingleResult();
+		
 	return e; //retornando a entidade que pesquisou
 	}
 	
 	/*-------------Método para deletar-------------*/
-	public void deletarPorId (E entidade) { //pesquisando a Primary Key
+	public void deletarPorId (E entidade) throws Exception{ //pesquisando a Primary Key
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		EntityTransaction transaction = entityManager.getTransaction(); // Iniciando transação/processo
 		transaction.begin(); //Dando Start na transação

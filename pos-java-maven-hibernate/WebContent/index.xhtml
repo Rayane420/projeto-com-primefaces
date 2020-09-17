@@ -8,17 +8,17 @@
 
 <h:body>
 
-	<h:form>
-		<p:breadCrumb>
-			<p:menuitem/>
-			<p:menuitem value="Página JSF" action="index.jsf"/>
-			<p:menuitem value="Página PrimeFaces" action="primefaces.jsf"/>
-		</p:breadCrumb>
-	</h:form>
+		<h:form>
+			<p:breadCrumb>
+				<p:menuitem/>
+				<p:menuitem value="Página JSF" action="index.jsf"/>
+				<p:menuitem value="Página PrimeFaces" action="www.google.com.br"/>
+			</p:breadCrumb>
+		</h:form>
 	
 
-	<h:form>
-		<h:messages showDetail="true" />
+	<h:form id="formulario">
+		<h:messages showDetail="true" showSummary="false" id="msg"/>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
 			<h:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"/>
@@ -56,57 +56,75 @@
 		
 		<br/>
 		<br/>
-		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user" cellpadding="15" border="1">
-		
-			<f:facet name="header">Lista de Usuários</f:facet>
-			<h:column>
-			<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{user.id}"/>
-			</h:column>
-		
-			<h:column>
-			<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{user.nome}"/>
-			</h:column>
+	</h:form>
+	<h:form id="formTable">
+			<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user" cellpadding="15" border="1">
 			
-			<h:column>
-			<f:facet name="header">Sobrenome</f:facet>
-				<h:outputText value="#{user.sobrenome}"/>
-			</h:column>
+				<f:facet name="header">Lista de Usuários</f:facet>
+				<h:column>
+				<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{user.id}"/>
+				</h:column>
 			
-			<h:column>
-			<f:facet name="header">E-mail</f:facet>
-				<h:outputText value="#{user.email}"/>
-			</h:column>
-			
-			<h:column>
-			<f:facet name="header">Idade</f:facet>
-				<h:outputText value="#{user.idade}"/>
-			</h:column>
-			
-			<h:column>
-			<f:facet name="header">Login</f:facet>
-				<h:outputText value="#{user.login}"/>
-			</h:column>
-			
-			
-			
-			<h:column>
-			<f:facet name="header">Editar</f:facet>
-				<h:commandLink value="Editar">
-					<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
-				</h:commandLink>
-			</h:column>
-			
-			<h:column>
-			<f:facet name="header">Delete</f:facet>
-				<h:commandLink value="Delete" action="#{usuarioPessoaManagedBean.remover}">
-					<f:setPropertyActionListener value="#{user}" 
-					target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
-				</h:commandLink>
-			</h:column>
-			
-		</h:dataTable>
+				<h:column>
+				<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{user.nome}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Sobrenome</f:facet>
+					<h:outputText value="#{user.sobrenome}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{user.email}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Idade</f:facet>
+					<h:outputText value="#{user.idade}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Login</f:facet>
+					<h:outputText value="#{user.login}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Editar</f:facet>
+					<h:commandLink immediate="true" id="botaoeditar">
+					<h:graphicImage url="resources/img/edicao2.png" width="35" height="35"/>
+						<f:setPropertyActionListener value="#{user}"
+							target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+						<f:ajax execute="botaoeditar" render=":formulario" />	
+					</h:commandLink>
+				</h:column>
+	
+				
+				<h:column>
+				<f:facet name="header">Delete</f:facet>
+					<h:commandLink  immediate="true"
+					action="#{usuarioPessoaManagedBean.remover}" id="botaoremover">
+					<h:graphicImage url="resources/img/delete.png" width="45" height="45"/>
+						<f:setPropertyActionListener value="#{user}" 
+						target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
+						<f:ajax execute="botaoremover" render="@form :formulario:msg" />
+					</h:commandLink>
+				</h:column>
+				
+				
+				<h:column>
+					<f:facet name="header">Telefones</f:facet>
+					<h:commandLink immediate="true" 
+						action="telefone.jsf" id="botaofone">
+						<h:graphicImage url="resources/img/phone.png" width="45" height="45"/>
+						<f:param name="codigouser" value="#{user.id}"/>
+					</h:commandLink>
+				</h:column>
+				
+				
+			</h:dataTable>
 		
 	</h:form>
 

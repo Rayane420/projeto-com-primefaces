@@ -62,7 +62,7 @@ public class TesteHibernate {
 	
 	/*Teste de delete**/
 	@Test
-	public void testeDelete() {
+	public void testeDelete() throws Exception {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		UsuarioPessoa pessoa = daoGeneric.pesquisar(6L, UsuarioPessoa.class);
 		
