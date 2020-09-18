@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	  xmlns:p="http://primefaces.org/ui">
 	  
 <h:head></h:head>	  
@@ -21,24 +22,27 @@
 		<h:messages showDetail="true" showSummary="false" id="msg"/>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
-			<h:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"/>
+			<h:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"
+			pt:placeholder="ID do Usuário"/>
 			
 			<h:outputLabel>Nome:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" required="true" requiredMessage="Favor informar seu nome"/>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" pt:placeholder="Informe o nome"
+			required="true" requiredMessage="Favor informar seu nome"/>
 			
 			<h:outputLabel>Sobrenome:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" required="true" requiredMessage="Favor informar seu Sobrenome"/>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" pt:placeholder="Informe o sobrenome"
+			required="true" requiredMessage="Favor informar seu Sobrenome"/>
 			
 			<h:outputLabel>E-mail:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" pt:placeholder="Informe o e-mail"/>
 			
 			<h:outputLabel>Idade:</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 			
 			<h:outputLabel>Sexo:</h:outputLabel>
 			<h:selectOneMenu value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
-				<f:selectItem itemValue="MASCULINO" />
-				<f:selectItem itemValue="FEMININO"/>
+				<f:selectItem itemValue="Masculino" />
+				<f:selectItem itemValue="Feminino"/>
 			</h:selectOneMenu>
 			
 			<h:outputLabel>Cep:</h:outputLabel>
@@ -74,10 +78,10 @@
 			
 			
 			<h:outputLabel>Login:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}"/>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" pt:placeholder="Informe o login"/>
 			
 			<h:outputLabel>Senha:</h:outputLabel>
-			<h:inputSecret redisplay="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}"/>
+			<h:inputSecret redisplay="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" pt:placeholder="Informe a senha"/>
 			
 			
 			

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head></h:head>	  
+
+<h:body>
+
+	<h:form>
+	
+		<p:messages autoUpdate="true" showDetail="true"/>
+		<br/>
+	
+		<p:panelGrid columns="2">
+		
+				<p:outputLabel>ID: </p:outputLabel>
+				<p:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"/>
+			
+				<p:outputLabel>Nome: </p:outputLabel>
+				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" required="true" requiredMessage="Campo nome é obrigatório"/>
+			
+				<p:outputLabel>Sobrenome: </p:outputLabel>
+				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" required="true" requiredMessage="Campo Sobrenome é obrigatório"/>
+			
+				<p:outputLabel>E-mail: </p:outputLabel>
+				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}"/>
+			
+				<p:outputLabel>Idade: </p:outputLabel>
+				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}"/>
+			
+				<p:outputLabel>Login: </p:outputLabel>
+				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" required="true" requiredMessage="Campo Login é obrigatório"/>
+			
+				<p:outputLabel>Senha: </p:outputLabel>
+				<p:password value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" required="true" requiredMessage="Campo Senha é obrigatório" redisplay="true"/>
+
+		</p:panelGrid>
+		
+		<br/>
+		<br/>
+		
+		<p:commandButton value="Salvar"  ajax="false" 
+		action="#{usuarioPessoaManagedBean.salvar}"/>
+		
+		<p:commandButton value="Novo" 
+		ajax="false" action="#{usuarioPessoaManagedBean.novo}"/>
+		
+		<br/>
+		<br/>
+		
+		<p:dataTable value="#{usuarioPessoaManagedBean.list}" var="user">
+		
+			<p:column headerText="ID">
+	        	<h:outputText value="#{user.id}" />
+	    	</p:column>
+	    	
+	    	<p:column headerText="Nome">
+	        	<h:outputText value="#{user.nome}" />
+	    	</p:column>
+	    	
+	    	<p:column headerText="Sobreome">
+	        	<h:outputText value="#{user.sobrenome}" />
+	    	</p:column>
+	    	
+	    	<p:column headerText="E-mail">
+	        	<h:outputText value="#{user.email}" />
+	    	</p:column>
+	    	
+	    	<p:column headerText="Idade">
+	        	<h:outputText value="#{user.idade}" />
+	    	</p:column>
+	    	
+	    	<p:column headerText="Login">
+	        	<h:outputText value="#{user.login}" />
+	    	</p:column>
+			
+			<p:column headerText="Sexo">
+	        	<h:outputText value="#{user.sexo}" />
+	    	</p:column>
+	    	
+	    	<p:column headerText="Editar">
+	    		<h:commandLink value="Editar">
+	    			<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
+	    		</h:commandLink>
+	    	</p:column>
+	    	
+	    	<p:column headerText="Remover">
+	    		<h:commandLink value="Remover" action="#{usuarioPessoaManagedBean.remover}">
+	    			<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
+	    		</h:commandLink>
+	    	</p:column>
+	    	
+		</p:dataTable>
+		
+	</h:form>
+	
+	
+	
+</h:body>
+	
+</html>	  
