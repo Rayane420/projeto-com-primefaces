@@ -13,7 +13,7 @@
 			<p:breadCrumb>
 				<p:menuitem/>
 				<p:menuitem value="Página JSF" action="index.jsf"/>
-				<p:menuitem value="Página PrimeFaces" action="www.google.com.br"/>
+				<p:menuitem value="Página PrimeFaces" action="primefaces.jsf"/>
 			</p:breadCrumb>
 		</h:form>
 	
@@ -38,6 +38,11 @@
 			
 			<h:outputLabel>Idade:</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+			
+			<h:outputLabel>Salário:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}" />
+			
+			
 			
 			<h:outputLabel>Sexo:</h:outputLabel>
 			<h:selectOneMenu value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
