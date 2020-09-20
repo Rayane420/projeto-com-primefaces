@@ -21,7 +21,7 @@
 		<p:messages autoUpdate="true" showDetail="true"/>
 		<br/>
 	
-		<p:panelGrid columns="2">
+		<h:panelGrid columns="4">
 		
 				<p:outputLabel>ID: </p:outputLabel>
 				<p:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"/>
@@ -38,19 +38,17 @@
 				<p:watermark value="Informe o sobrenome" for="sobrenomeP"></p:watermark>
 				</p:inputText>
 			
-				<p:outputLabel>E-mail: </p:outputLabel>
-				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" id="email">
-				<p:watermark value="Informe o e-mail" for="email"></p:watermark>
-				</p:inputText>
+				
 			
 				<p:outputLabel>Idade: </p:outputLabel>
 				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}"/>
 			
 				<p:outputLabel>Salário: </p:outputLabel>
-				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}"/>
+				<p:inputNumber value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}"/>
 					
 				<p:outputLabel>Sexo:</p:outputLabel>
-				<p:selectOneMenu value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
+				<p:selectOneMenu style="width:190"
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
 					<f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
 					<f:selectItem itemValue="Feminino" itemLabel="Feminino"/>
 					
@@ -83,18 +81,17 @@
 				<p:outputLabel>Ibge:</p:outputLabel>
 				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.ibge}" id="ibge" />
 				
-				<p:outputLabel>Gia:</p:outputLabel>
-				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.gia}" id="gia" />
-	    	
-			
 				<p:outputLabel>Login: </p:outputLabel>
 				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" required="true" requiredMessage="Campo Login é obrigatório"/>
-			
+				
+				<p:outputLabel>Gia:</p:outputLabel>
+				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.gia}" id="gia" />
+	    		
 				<p:outputLabel>Senha: </p:outputLabel>
 				<p:password value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" required="true" requiredMessage="Campo Senha é obrigatório" redisplay="true"/>
 
 
-		</p:panelGrid>
+		</h:panelGrid>
 		
 		<br/>
 		<br/>
@@ -112,14 +109,25 @@
 		</h:form>
 		
 		<h:form>
+			<p:panel header="Consultar Usuário">
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Nome: "/>
+					<p:inputText value="#{usuarioPessoaManagedBean.campoPesquisa}"/>
+					<p:commandButton value="Buscar" actionListener="#{usuarioPessoaManagedBean.pesquisar}" update="formtable, :graficosalario"/>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+		
+		<h:form id="formtable">
 		
 		<p:dataTable value="#{usuarioPessoaManagedBean.list}" var="user">
 		
-			<p:column headerText="ID">
+			<p:column headerText="ID"  width="20">
 	        	<h:outputText value="#{user.id}" />
 	    	</p:column>
 	    	
-	    	<p:column headerText="Nome">
+	    	<p:column headerText="Nome" width="400">
 	        	<h:outputText value="#{user.nome}" />
 	    	</p:column>
 	    	
@@ -127,57 +135,95 @@
 	        	<h:outputText value="#{user.sobrenome}" />
 	    	</p:column>
 	    	
-	    	<p:column headerText="E-mail">
-	        	<h:outputText value="#{user.email}" />
-	    	</p:column>
-	    	
+    	
 	    	<p:column headerText="Idade">
 	        	<h:outputText value="#{user.idade}" />
 	    	</p:column>
 	    	
 	    	
-	    	
-	    	
-	    	<p:column headerText="Login">
-	        	<h:outputText value="#{user.login}" />
-	    	</p:column>
-			
 			<p:column headerText="Sexo">
 	        	<h:outputText value="#{user.sexo}" />
 	    	</p:column>
 	    	
 	    	<p:column headerText="Editar">
+	    	<center>
 	    		<h:commandLink immediate="true" id="botaoeditar">
 	    			<f:setPropertyActionListener value="#{user}" 
 	    			target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
 	    			<f:ajax execute="botaoeditar" render=":formulario"/>
 	    			<h:graphicImage url="resources/img/edicao2.png" width="35" height="35" />
 	    		</h:commandLink>
+	    	</center>
 	    	</p:column>
 	    	
 	    	<p:column headerText="Remover">
+	    	<center>
 	    		<h:commandLink id="botaoremover"
 	    			action="#{usuarioPessoaManagedBean.remover}">
 	    			<f:setPropertyActionListener value="#{user}" 
 	    			target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
-	    			<f:ajax execute="botaoremover" render="@form"/>
+	    			<f:ajax execute="botaoremover" render="@form :graficosalario"/>
 	    			<h:graphicImage url="resources/img/delete.png" width="45" height="45"/>
 	    		</h:commandLink>
+	    	</center>
 	    	</p:column>
 	    	
 	    	<p:column headerText="Telefones">
+	    	<center>
 				<h:commandLink immediate="true" 
 					action="telefoneprimefaces.jsf" id="botaofone">
 					<h:graphicImage url="resources/img/phone.png" width="45" height="45"/>
 					<f:param name="codigouser" value="#{user.id}"/>
 				</h:commandLink>
+			</center>	
 			</p:column>
+	    	
+	    	<p:column headerText="E-mails">
+	    	<center>
+	    		<p:commandLink update=":formtable:dialogEmail" oncomplete="PF('dialogEmail').show()">
+	    		<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
+	    		<h:graphicImage  width="30" height="30" url="resources/img/email.png" />	
+	    		</p:commandLink>
+	    	</center>	
+	    	</p:column>
 	    	
 		</p:dataTable>
 		
+		<p:dialog header="E-mails" id="dialogEmail" widgetVar="dialogEmail"
+		position="center" modal="true" width="500px" resizable="false">
+		
+			<h:panelGrid columns="3">
+				<h:outputLabel value="E-mail"/>
+				<p:inputText value="#{usuarioPessoaManagedBean.emailUser.email}" id="emailuseradd" style="width:315px"/>
+				<p:commandButton value="Adicionar" 
+				actionListener="#{usuarioPessoaManagedBean.addEmail}" update="emailuseradd, dataTableEmail"></p:commandButton>
+			</h:panelGrid>
+		
+			<p:dataTable value="#{usuarioPessoaManagedBean.usuarioPessoa.emails}" var="email" id="dataTableEmail">
+			
+				<p:column headerText="Id" width="20">
+					<h:outputLabel value="#{email.id}"/>				
+				</p:column>
+				
+				<p:column headerText="Email" width="300">
+					<h:outputLabel value="#{email.email}"/>				
+				</p:column>
+				
+				<p:column headerText="Remover" width="70">
+					<h:commandLink id="botaoremoveremail" actionListener="#{usuarioPessoaManagedBean.removerEmail}">
+						<f:param name="codigoemail" value="#{email.id}" />
+						<f:ajax execute="botaoremoveremail" render="dataTableEmail" />
+						<p:graphicImage url="resources/img/delete.png" width="45" height="45"/>
+					</h:commandLink>
+				</p:column>
+			
+			</p:dataTable>
+
+		</p:dialog>
+		
 	</h:form>
-	
-	<p:chart type="bar" model="#{usuarioPessoaManagedBean.barChartModel}"/>
+	<br/>
+	<p:chart type="bar" model="#{usuarioPessoaManagedBean.barChartModel}" id="graficosalario"/>
 	
 </h:body>
 	

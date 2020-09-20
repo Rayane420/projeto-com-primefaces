@@ -18,19 +18,28 @@
 	
 
 		<h:form id="formulario">
-			<p:messages showDetail="true" showSummary="false" id="msg"/>
+			<p:growl showDetail="true" showSummary="false" id="msg"/>
 			
 			<h:panelGrid columns="2">
 							
 				<p:outputLabel>Usuario: </p:outputLabel>
-				<h:outputLabel value="#{telefoneManagedBean.user.nome}" />
+				<p:outputLabel value="#{telefoneManagedBean.user.nome}" />
 	
 				<p:outputLabel>Número:</p:outputLabel>
-				<h:inputText value="#{telefoneManagedBean.telefone.numero}" required="true" requiredMessage="Campo Número é obrigatório"/>
+				<p:inputMask value="#{telefoneManagedBean.telefone.numero}" 
+				mask="(99)9 9999-9999"
+				required="true" requiredMessage="Campo Número é obrigatório"/>
 	
 				<p:outputLabel>Tipo:</p:outputLabel>
-				<h:inputText value="#{telefoneManagedBean.telefone.tipo}" required="true" requiredMessage="Campo Tipo é obrigatório"/>
+				<p:selectOneMenu value="#{telefoneManagedBean.telefone.tipo}" 
+				required="true" requiredMessage="Campo Tipo é obrigatório">
+					<f:selectItem itemValue="RECADO" itemLabel="Recado"/>
+					<f:selectItem itemValue="CELULAR" itemLabel="Celular"/>
+					<f:selectItem itemValue="FIXO" itemLabel="Fixo"/>
+					<f:selectItem itemValue="RESIDENCIAL" itemLabel="Residencial"/>
+					<f:selectItem itemValue="WHATSAPP" itemLabel="Whatsapp"/>
 				
+				</p:selectOneMenu>
 			</h:panelGrid>
 	
 			<br/>
@@ -44,22 +53,29 @@
 			<p:dataTable value="#{telefoneManagedBean.user.telefoneUsers}" 
 			var="fone" id="tableFone">
 								
-				<p:column style="width:150px;">
+				<p:column width="30">
+				<center>
 					<f:facet name="header">Id</f:facet>
 					<h:outputText value="#{fone.id}" />
+				</center>	
 				</p:column>
 				
-				<p:column>
+				<p:column width="150">
+				<center>
 					<f:facet name="header">Número</f:facet>
 					<h:outputText value="#{fone.numero}"  />
+				</center>	
 				</p:column>
 	
-				<p:column>
+				<p:column width="200">
+				<center>
 					<f:facet name="header">Tipo</f:facet>
 					<h:outputText value="#{fone.tipo}" />
+				</center>	
 				</p:column>
 				
-				<p:column>
+				<p:column width="50">
+				<center>
 					<f:facet name="header">Delete</f:facet>
 					<h:commandLink immediate="true"
 						action="#{telefoneManagedBean.removeTelefone}" id="botaoremover">
@@ -68,6 +84,7 @@
 							target="#{telefoneManagedBean.telefone}" />
 							<f:ajax execute="botaoremover" render="@form :formulario:msg" />	
 					</h:commandLink>
+				</center>	
 				</p:column>
 				
 			</p:dataTable>
